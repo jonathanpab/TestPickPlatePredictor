@@ -1,4 +1,4 @@
-const validateFormatTime = require('../Class/valideFormatTime');
+const validateFormatTime = require('../Class/validateFormatTime');
 
 test('valide 24:00 to false', ()=>{
     expect(validateFormatTime("24:00")).toBe(false);

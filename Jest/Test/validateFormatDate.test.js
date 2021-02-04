@@ -1,4 +1,4 @@
-const validateFormatDate = require('../Class/valideFormatDate');
+const validateFormatDate = require('../Class/validateFormatDate');
 
 test('valide 29-02-2021 to false', ()=>{
     expect(validateFormatDate("29-02-2021")).toBe(false);
