@@ -1,6 +1,6 @@
 const validateNormalPlate = require('../Class/validateNormalPlate');
 
-test('valide work plate AAB-0123 to Is work license plate', ()=>{
+test('valide work plate AAB-0123 to false', ()=>{
     expect(validateNormalPlate("AAB-0123")).toBe(false);
 });
 

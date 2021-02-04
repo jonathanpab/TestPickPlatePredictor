@@ -1,4 +1,4 @@
-//Validate correct path for license plate
+//Validate correct pattern for license plate
 function validate(plate){
     pattValidPlate = /^[A-CEG-XZ][A-Z]{2}[/-][0-9]{3,4}$/
     if(pattValidPlate.test(plate)){
