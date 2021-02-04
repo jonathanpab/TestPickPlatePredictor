@@ -1,11 +1,8 @@
 //validate correct pattern of time
 function validateFormatTime(time){
+    //regex pattern for a valid time. Since 00:00 until 23:59
     pattTime =  /^([01][0-9]|2[0-3]):[0-5][0-9]$/;
-    if(pattTime.test(time)){
-        return(true);
-    }else{
-        return(false);
-    }
+    return(pattTime.test(time))
 }
 
 module.exports = validateFormatTime;

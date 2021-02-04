@@ -1,10 +1,7 @@
 //Validate correct pattern for license plate
 function validate(plate){
-    pattValidPlate = /^[A-CEG-XZ][A-Z]{2}[/-][0-9]{3,4}$/
-    if(pattValidPlate.test(plate)){
-        return(true);
-    }else{
-        return(false);
-    }
+    //regex pattern for a valid license plate (D,F are excluded in Ecuador)
+    pattValidPlate = /^[A-CEG-Z][A-Z]{2}[/-][0-9]{3,4}$/
+    return(pattValidPlate.test(plate))
 }
 module.exports = validate;

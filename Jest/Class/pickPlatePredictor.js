@@ -6,11 +6,7 @@ const validateTimeRange = require('./validateTimeRange');
 function pickPlatePredictor(plateNumber, date, time){
     if(validateNormalPlate(plateNumber)){
         if(validatePlateDay(plateNumber,date)){
-            if(validateTimeRange(time)){
-                return(true);
-            }else{
-                return(false);
-            }
+            return(validateTimeRange(time));
         }else{
             return(true);
         }
