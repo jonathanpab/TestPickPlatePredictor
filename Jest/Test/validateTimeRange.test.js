@@ -9,7 +9,7 @@ test('valide 07:59 to false', ()=>{
 });
 
 test('valide 09:31 to true', ()=>{
-    expect(validateTimeRange("09:01")).toBe(true);
+    expect(validateTimeRange("09:31")).toBe(true);
 });
 
 test('valide 09:30 to false', ()=>{

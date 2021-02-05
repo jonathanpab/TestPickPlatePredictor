@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Test of pick and plate license predictor",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonathanpab/TestPickPlatePredictor.git"
