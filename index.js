@@ -2,10 +2,10 @@ const express = require('express')
 const app = express()
 const port = 3000
 var path = require('path');
-const validate = require('./Jest/Class/validatePlate');
-const validateFormatDate = require('./Jest/Class/validateFormatDate');
-const validateFormatTime = require('./Jest/Class/validateFormatTime');
-const pickPlatePredictor = require('./Jest/Class/pickPlatePredictor');
+const validate = require('./Class/validatePlate');
+const validateFormatDate = require('./Class/validateFormatDate');
+const validateFormatTime = require('./Class/validateFormatTime');
+const pickPlatePredictor = require('./Class/pickPlatePredictor');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
