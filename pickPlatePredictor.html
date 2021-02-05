@@ -5,55 +5,73 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>
-    var aux = 0;
+    var aux1 = 0;
+    var aux2 = 0;
+    var aux3 = 0;
     function validatePlateText(){
+        $('.able').hide();
+        $('.plate').hide();
         if(document.getElementById("fplate").value!=""){
             var jsonReq = { plate: document.getElementById("fplate").value };
             $.post("validatePlate", jsonReq, function(isValid){
                 if(!isValid){
-                    aux=1;
-                    alert("Plate no valid! It must be AAA-0000");
+                    aux1=1;
+                    $('.errorPlate').show();
                 }else{
-                    aux=0;
+                    aux1=0;
                 }
             });
         }
     }
     function validateFormatDateText(){
+        $('.able').hide();
+        $('.date').hide();
         if(document.getElementById("fdate").value!=""){
             var jsonReq = { date: document.getElementById("fdate").value };
             $.post("validateDate", jsonReq , function(isValid){
                 if(!isValid){
-                    aux=1;
-                    alert("Date no valid! It must be DD-MM-YYYY");
+                    aux2=1;
+                    $('.errorDate').show();
                 }else{
-                    aux=0;
+                    aux2=0;
                 }
             });
         }
     }
     function validateFormatTimeText(){
+        $('.able').hide();
+        $('.time').hide();
         if(document.getElementById("ftime").value!=""){
             var jsonReq = { time: document.getElementById("ftime").value };
             $.post("validateTime", jsonReq , function(isValid){
                 if(!isValid){
-                    aux=1;
-                    alert("Time no valid! It must be HH:MM");
+                    aux3=1;
+                    $('.errorTime').show();
                 }else{
-                    aux=0;
+                    aux3=0;
                 }
             });
         }
     }
     function verifyPickPlatePredictor(){
+        $('.able').hide();
         if(document.getElementById("fplate").value==''){
-            alert("Plate is empty!");
-        }else if(document.getElementById("fdate").value==''){
-            alert("Date is empty!");
-        }else if(document.getElementById("ftime").value==''){
-            alert("Time is empty!");
-        }else if(aux == 1){
-            alert("Correct errors please!");
+            aux1=1;
+            $('.plate').hide();
+            $('.emptyPlate').show();
+        }
+        if(document.getElementById("fdate").value==''){
+            aux2=1;
+            $('.date').hide();
+            $('.emptyDate').show();
+        }
+        if(document.getElementById("ftime").value==''){
+            aux3=1;
+            $('.time').hide();
+            $('.emptyTime').show();
+        }
+        if(aux1 == 1 || aux2 == 1 || aux3 == 1){
+            $('.errors').show();
         }else{
             var jsonReq = { 
                 plate: document.getElementById("fplate").value, 
@@ -62,9 +80,11 @@
             };
             $.post("validatePickPlatePredictor", jsonReq , function(isValid){
                 if(!isValid){
-                    alert("This license plate is not able to be in road");
+                    $('.alert').hide();
+                    $('.notAble').show();
                 }else{
-                    alert("This license plate is able to be in road");
+                    $('.alert').hide();
+                    $('.able').show();
                 }
             });
         }
@@ -73,25 +93,58 @@
 <title>Pick Plate Predictor</title>
 </head>
 <body>
-    <h1>Pick Plate Predictor</h1>
+    <div class="container">
+        <h1>Pick Plate Predictor</h1>
+        <div class="row">
+            <div class="col-sm-4">
+            Plate: <input type="text" id="fplate" maxlength="8" oninput="this.value = this.value.toUpperCase()"
+            autocomplete="off" placeholder="ABC-0000" onchange="validatePlateText()">
+            </div>
+            <div class="col-sm-4">
+            Date: <input type="text" id="fdate" maxlength="10"
+            autocomplete="off" placeholder="DD-MM-YYYY" onchange="validateFormatDateText()">
+            </div>
+            <div class="col-sm-4">
+            Time: <input type="time" id="ftime" maxlength="5"
+            autocomplete="off" placeholder="HH:MM" onchange="validateFormatTimeText()">
+            </div>
+        </div>
+    </div>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-sm">
-            Plate: <input type="text" id="fplate" maxlength="8" oninput="this.value = this.value.toUpperCase()"
-            autocomplete="off" placeholder="ABC-0000" onblur="validatePlateText()">
-            </div>
-            <div class="col-sm">
-            Date: <input type="text" id="fdate" maxlength="10"
-            autocomplete="off" placeholder="DD-MM-YYYY" onblur="validateFormatDateText()">
-            </div>
-            <div class="col-sm">
-            Time: <input type="time" id="ftime" maxlength="5"
-            autocomplete="off" placeholder="HH:MM" onblur="validateFormatTimeText()">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
             <button onclick="verifyPickPlatePredictor()">Verify</button>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row alert alert-danger errors" role="alert" style="display:none;">
+            <div class="col-sm">Correct errors below please!</div>
+        </div>
+        <div class="row alert alert-danger errorPlate plate" role="alert" style="display:none;">
+            <div class="col-sm">Plate no valid! It must be AAA-0000</div>
+        </div>
+        <div class="row alert alert-danger errorDate date" role="alert" style="display:none;">
+            <div class="col-sm">Date no valid! It must be DD-MM-YYYY</div>
+        </div>
+        <div class="row alert alert-danger errorTime time" role="alert" style="display:none;">
+            <div class="col-sm">Time no valid! It must be HH:MM</div>
+        </div>
+        <div class="row alert alert-danger emptyPlate plate" role="alert" style="display:none;">
+            <div class="col-sm">Plate is empty!</div>
+        </div>
+        <div class="row alert alert-danger emptyDate date" role="alert" style="display:none;">
+            <div class="col-sm">Date is empty!</div>
+        </div>
+        <div class="row alert alert-danger emptyTime time" role="alert" style="display:none;">
+            <div class="col-sm">Time is empty!</div>
+        </div>
+        <div class="row alert alert-danger notAble" role="alert" style="display:none;">
+            <div class="col-sm">This license plate is not able to be in road.</div>
+        </div>
+        <div class="row alert alert-success able" role="alert" style="display:none;">
+            <div class="col-sm">This license plate is able to be in road.</div>
         </div>
     </div>
 </body>
