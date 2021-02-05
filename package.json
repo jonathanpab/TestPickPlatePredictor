@@ -1,0 +1,20 @@
+{
+  "name": "testpickplatepredictor",
+  "version": "1.0.0",
+  "description": "Test of pick and plate license predictor",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathanpab/TestPickPlatePredictor.git"
+  },
+  "author": "Jonathan Andrade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathanpab/TestPickPlatePredictor/issues"
+  },
+  "homepage": "https://github.com/jonathanpab/TestPickPlatePredictor#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

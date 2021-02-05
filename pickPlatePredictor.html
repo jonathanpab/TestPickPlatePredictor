@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+    var aux = 0;
+    function validatePlateText(){
+        if(document.getElementById("fplate").value!=""){
+            var jsonReq = { plate: document.getElementById("fplate").value };
+            $.post("validatePlate", jsonReq, function(isValid){
+                if(!isValid){
+                    aux=1;
+                    alert("Plate no valid! It must be AAA-0000");
+                }else{
+                    aux=0;
+                }
+            });
+        }
+    }
+    function validateFormatDateText(){
+        if(document.getElementById("fdate").value!=""){
+            var jsonReq = { date: document.getElementById("fdate").value };
+            $.post("validateDate", jsonReq , function(isValid){
+                if(!isValid){
+                    aux=1;
+                    alert("Date no valid! It must be DD-MM-YYYY");
+                }else{
+                    aux=0;
+                }
+            });
+        }
+    }
+    function validateFormatTimeText(){
+        if(document.getElementById("ftime").value!=""){
+            var jsonReq = { time: document.getElementById("ftime").value };
+            $.post("validateTime", jsonReq , function(isValid){
+                if(!isValid){
+                    aux=1;
+                    alert("Time no valid! It must be HH:MM");
+                }else{
+                    aux=0;
+                }
+            });
+        }
+    }
+    function verifyPickPlatePredictor(){
+        if(document.getElementById("fplate").value==''){
+            alert("Plate is empty!");
+        }else if(document.getElementById("fdate").value==''){
+            alert("Date is empty!");
+        }else if(document.getElementById("ftime").value==''){
+            alert("Time is empty!");
+        }else if(aux == 1){
+            alert("Correct errors please!");
+        }else{
+            var jsonReq = { 
+                plate: document.getElementById("fplate").value, 
+                date: document.getElementById("fdate").value, 
+                time: document.getElementById("ftime").value
+            };
+            $.post("validatePickPlatePredictor", jsonReq , function(isValid){
+                if(!isValid){
+                    alert("This license plate is not able to be in road");
+                }else{
+                    alert("This license plate is able to be in road");
+                }
+            });
+        }
+    }
+</script>
+<title>Pick Plate Predictor</title>
+</head>
+<body>
+    <h1>Pick Plate Predictor</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+            Plate: <input type="text" id="fplate" maxlength="8" oninput="this.value = this.value.toUpperCase()"
+            autocomplete="off" placeholder="ABC-0000" onblur="validatePlateText()">
+            </div>
+            <div class="col-sm">
+            Date: <input type="text" id="fdate" maxlength="10"
+            autocomplete="off" placeholder="DD-MM-YYYY" onblur="validateFormatDateText()">
+            </div>
+            <div class="col-sm">
+            Time: <input type="time" id="ftime" maxlength="5"
+            autocomplete="off" placeholder="HH:MM" onblur="validateFormatTimeText()">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+            <button onclick="verifyPickPlatePredictor()">Verify</button>
+        </div>
+    </div>
+</body>
+</html>

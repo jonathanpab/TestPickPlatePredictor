@@ -1,6 +1,6 @@
 const pickPlatePredictor = require('../Class/pickPlatePredictor');
 
-test('valide plate day AAB-0128 on 04-02-2021 at 07:00 to true', ()=>{
+test('valide plate day ABC-0128 on 04-02-2021 at 07:00 to false', ()=>{
     expect(pickPlatePredictor("ABC-0128","04-02-2021", "07:00")).toBe(false);
 });
 
