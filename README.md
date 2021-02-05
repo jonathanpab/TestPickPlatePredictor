@@ -1,10 +1,18 @@
 # TestPickPlatePredictor
-Usage
+
+## Usage
+
 Run app in dev mode local
 
+```bash
 npm run start
+```
 
-Testing
+## Test
+
 Run test using Jest 
+
+```bash
 cd Jest/
 npm run test
+```
